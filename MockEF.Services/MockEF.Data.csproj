@@ -48,12 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContext.cs" />
+    <Compile Include="Enums\EntityStatus.cs" />
     <Compile Include="IDbContext.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Enrollment.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\GenericEfRepository.cs" />
+    <Compile Include="Repository\IReadWriteRepository.cs" />
     <Compile Include="SchoolInitializer.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -5,6 +5,7 @@ namespace MockEF.App_Start
     using System.Reflection;
     using System.Web.Mvc;
     using MockEF.Data;
+    using MockEF.Data.Repository;
     using MockEF.Service;
     using SimpleInjector;
     using SimpleInjector.Integration.Web;
@@ -34,6 +35,10 @@ namespace MockEF.App_Start
 
             container.Register<IService, MockEFService>(Lifestyle.Scoped);
             container.Register<IDbContext, Context>(Lifestyle.Singleton);
+
+            container.Register(typeof(IReadWriteRepository<>), typeof(GenericEfRepository<>), Lifestyle.Scoped);
+            container.Register<IUnitOfWork, UnitOfWork>(Lifestyle.Singleton);
+
 
         }
     }

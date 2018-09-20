@@ -13,7 +13,7 @@ namespace MockEF.Tests.Data
             {
                 new Student
                 {
-                    ID = 1,
+                    StudentID = 1,
                     FirstMidName ="Peggy",
                     LastName ="Justice",
                     EnrollmentDate =DateTime.Parse("2001-09-01"),
@@ -37,7 +37,7 @@ namespace MockEF.Tests.Data
                 },
                 new Student
                 {
-                    ID = 2,
+                    StudentID = 2,
                     FirstMidName ="Meredith",
                     LastName ="Alonso",
                     EnrollmentDate=DateTime.Parse("2002-09-01"),
@@ -61,7 +61,7 @@ namespace MockEF.Tests.Data
                 },
                 new Student
                 {
-                    ID = 3,
+                    StudentID = 3,
                     FirstMidName ="Patrick",
                     LastName ="Emerton",
                     EnrollmentDate=DateTime.Parse("2002-09-01"),

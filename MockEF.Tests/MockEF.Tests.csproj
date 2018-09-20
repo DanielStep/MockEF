@@ -126,7 +126,10 @@
   <ItemGroup>
     <Compile Include="Data\FakeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ClassUnderTest.cs" />
+    <Compile Include="Services\ClassUnderTestGeneric.cs" />
     <Compile Include="Services\ServiceTests.cs" />
+    <Compile Include="Services\UnitOfWorkTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

@@ -96,13 +96,14 @@ namespace MockEF.Tests.Services
             var testName = "Meredith";
             var data = new List<Enrollment>
             {
-            new Enrollment{EnrollmentID=1, Student = new Student() { ID=1, FirstMidName=testName}, StudentID =1,CourseID=1050,Grade=Grade.A},
-            new Enrollment{EnrollmentID=2, Student = new Student() { ID=2, FirstMidName="Daniel"}, StudentID=2,CourseID=4022,Grade=Grade.C},
+            new Enrollment{EnrollmentID=1, Student = new Student() { StudentID=1, FirstMidName=testName}, StudentID =1,CourseID=1050,Grade=Grade.A},
+            new Enrollment{EnrollmentID=2, Student = new Student() { StudentID=2, FirstMidName="Daniel"}, StudentID=2,CourseID=4022,Grade=Grade.C},
             };
 
             //Arrange
             var mockSet = GetQueryableMockDbSet(data.ToArray());
             mockSet.Setup(x => x.Include(It.IsAny<string>())).Returns(mockSet.Object);
+            mockSet.Setup(x => x.AsNoTracking()).Returns(mockSet.Object);
 
             var mockContext = new Mock<IDbContext>();
 
@@ -314,11 +315,11 @@ namespace MockEF.Tests.Services
             //Arrange
             var data = new List<Student>
             {
-                new Student{ID = 1, FirstMidName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01")},
-                new Student{ID = 2, FirstMidName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01")},
+                new Student{StudentID = 1, FirstMidName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01")},
+                new Student{StudentID = 2, FirstMidName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01")},
             };
             var testId = 1;
-            var testStudent = data.SingleOrDefault(s => s.ID == testId);
+            var testStudent = data.SingleOrDefault(s => s.StudentID == testId);
 
             var mockSet = GetQueryableMockDbSet(data.ToArray());
             mockSet.Setup(x => x.Remove(testStudent)).Callback(() => data.Remove(testStudent));
@@ -329,12 +330,12 @@ namespace MockEF.Tests.Services
             var classUnderTest = new MockEFService(mockContext.Object);
 
             //Act
-            var result = classUnderTest.RemoveStudent(data.First().ID);
+            var result = classUnderTest.RemoveStudent(data.First().StudentID);
 
             //Assert
             result.ShouldBe(1);
             data.Count.ShouldBe(1);
-            data.Any(s => s.ID == testStudent.ID).ShouldBe(false);
+            data.Any(s => s.StudentID == testStudent.StudentID).ShouldBe(false);
             mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
 
@@ -344,11 +345,11 @@ namespace MockEF.Tests.Services
             //Arrange
             var data = new List<Student>
             {
-                new Student{ID = 1, FirstMidName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01")},
-                new Student{ID = 2, FirstMidName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01")},
+                new Student{StudentID = 1, FirstMidName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01")},
+                new Student{StudentID = 2, FirstMidName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01")},
             };
             var testId = 0;
-            var testStudent = data.SingleOrDefault(s => s.ID == testId);
+            var testStudent = data.SingleOrDefault(s => s.StudentID == testId);
 
             var mockSet = GetQueryableMockDbSet(data.ToArray());
             mockSet.Setup(x => x.Remove(testStudent)).Callback(() => data.Remove(testStudent));
@@ -359,7 +360,7 @@ namespace MockEF.Tests.Services
             var classUnderTest = new MockEFService(mockContext.Object);
 
             //Act
-            var result = classUnderTest.RemoveStudent(data.First().ID);
+            var result = classUnderTest.RemoveStudent(data.First().StudentID);
 
             //Assert
             result.ShouldBe(0);

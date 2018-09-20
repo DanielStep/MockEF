@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MockEF.Data.Models
 {
-    public class Student
+    public class Student : BaseModel
     {
-        public int ID { get; set; }
+        public int StudentID { get; set; }
         public string LastName { get; set; }
         public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }

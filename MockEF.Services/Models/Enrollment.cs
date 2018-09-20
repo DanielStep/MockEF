@@ -5,7 +5,7 @@
         A, B, C, D, F
     }
 
-    public class Enrollment
+    public class Enrollment : BaseModel
     {
         public int EnrollmentID { get; set; }
         public int CourseID { get; set; }
